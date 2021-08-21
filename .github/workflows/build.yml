@@ -11,6 +11,10 @@ jobs:
       matrix:
         os: [linux, darwin, windows]
         arch: [amd64, arm64]
+      exclude:
+      # Don't build ARM/Windows:
+      - os: windows
+        arch: arm64
 
     runs-on: ubuntu-latest
 
