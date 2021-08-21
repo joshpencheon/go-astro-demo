@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [linux, darwin, windows]
-        arch: [x86_64 arm64]
+        arch: [x86_64, arm64]
 
     runs-on: ubuntu-latest
 
