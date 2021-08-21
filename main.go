@@ -1,3 +1,5 @@
+// Based on Alex Ellis's Golang handbook examples
+
 package main
 
 import (
