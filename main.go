@@ -10,8 +10,14 @@ import (
 	"net/http"
 )
 
+type person struct {
+	Name  string `json:"name"`
+	Craft string `json:"craft"`
+}
+
 type people struct {
-	Number int `json:"number"`
+	Number int      `json:"number"`
+	Person []person `json:"people"`
 }
 
 func main() {
@@ -22,7 +28,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("%d people found in space.\n", people.Number)
+	fmt.Printf("%d people found in space.\n\n", people.Number)
+
+	for _, p := range people.Person {
+		fmt.Printf("Waving at %s aboard %q\n", p.Name, p.Craft)
+	}
 }
 
 func getAstros(apiURL string) (people, error) {
