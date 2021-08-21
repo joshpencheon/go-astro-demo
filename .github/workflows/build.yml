@@ -48,7 +48,7 @@ jobs:
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "build-*-*/*"
-        tag: ${{ github.sha }}
+        tag: ${{ github.run_id }}
         commit: "main"
         body: "Automated release of ${{ github.sha }}"
         token: ${{ secrets.GITHUB_TOKEN }}
