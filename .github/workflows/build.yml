@@ -41,6 +41,9 @@ jobs:
 
     needs: build
 
+    # only publish when triggered by a commit on the primary branch:
+    if: github.ref == 'refs/heads/main'
+
     steps:
     - uses: actions/download-artifact@v2
     - name: Debug
