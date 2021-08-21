@@ -1,0 +1,36 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [linux, darwin, windows]
+        arch: [x86_64 arm64]
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build executable
+      run: go build -o build/
+      env:
+        GOOS: ${{ matrix.os }}
+        GOARCH: ${{ matrix.arch }}
+
+  publish:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "build/*"
+        body: "Automated release of ${{ github.sha }}"
+        token: ${{ secrets.GITHUB_TOKEN }}
